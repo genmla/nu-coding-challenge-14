@@ -11,32 +11,40 @@
 </head>
 
 <body>
-  <div class="tabs is-boxed">
+  <disection class="hero-body">
+    <p class="title">
+      The Tech Blog
+    </p>    
+</section>
+  <div class="tabs is-centered is-boxed is-large">
     <ul>
       <li class="is-active">
-        <a>
+        <a href="/">
           <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
           <span>Home</span>
         </a>
       </li>
       <li>
-        <a>
+        <a href="/dashboard">
           <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
           <span>Dashboard</span>
         </a>
       </li>
+      {{#if logged_in}}
       <li>
-        <a>
+        <a href="/logout">
+          <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
+          <span>Logout</span>
+        </a>
+      </li>
+      {{else}}
+      <li>
+        <a href="/login">
           <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
           <span>Login</span>
         </a>
       </li>
-      <li>
-        <a>
-          <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
-          <span>Documents</span>
-        </a>
-      </li>
+      {{/if}}
     </ul>
   </div>
   <main>
