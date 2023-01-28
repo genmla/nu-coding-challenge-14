@@ -22,17 +22,17 @@ router.post('/', async (req, res) => {
     }
 });
 
-//login for existing users by finding user email
+//login for existing users by finding user name
 router.post('/login', async (req, res) => {
     try {
         const dbUserData = await Users.findOne({
             where: {
-                email: req.body.email
+                name: req.body.name
             }
         })
         if (!dbUserData) {
-            alert('Email not found, please try again');
-            res.status(400).json({ message: 'Email not found.'});
+            alert('Username not found, please try again');
+            res.status(400).json({ message: 'Username not found.'});
             return;
         }
         
