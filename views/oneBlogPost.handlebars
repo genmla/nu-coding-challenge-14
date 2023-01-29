@@ -1,0 +1,40 @@
+<section class="hero-body">
+    <p class="title">
+        The Tech Blog
+    </p>
+</section>
+
+<div class="columns">
+    <div class="column is-8 is-offset-1">
+        <section class="blog-list">
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">{{blogTitle}}</p>
+                </header>
+                <div class="card-content">
+                    <div class="content">
+                        {{blogContent}}
+                        <br>
+                        <br>
+                        Posted by {{blogUser}} on <time>{{blogDate}}</time>
+                    </div>
+                </div>
+            </div>
+            {{#each oneBlogPost as |comment|}}
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">{{comment.comment}}</p>
+                </header>
+                <div class="card-content">
+                    <div class="content">
+                        <br>
+                        <br>
+                        Posted by {{comment.user.name}} on <time>{{comment.date}}</time>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </section>
+    </div>
+
+</div>
