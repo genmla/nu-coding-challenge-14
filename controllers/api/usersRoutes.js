@@ -29,9 +29,9 @@ router.post('/login', async (req, res) => {
             where: {
                 name: req.body.name
             }
-        })
+        });
+        
         if (!dbUserData) {
-            alert('Username not found, please try again');
             res.status(400).json({ message: 'Username not found.'});
             return;
         }
@@ -46,12 +46,10 @@ router.post('/login', async (req, res) => {
 
         req.session.save(() => {
             req.session.user_id = dbUserData.id;
-            res.session.logged_in = true;
+            req.session.logged_in = true;
 
             res.json({ user: dbUserData, message: 'Logging in'});
         });
-
-        // res.render('homepage') 
 
     } catch (err) {
         res.status(400).json(err);
