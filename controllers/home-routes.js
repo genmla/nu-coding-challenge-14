@@ -4,8 +4,33 @@ const withAuth = require('../utils/auth');
 
 //homepage
 router.get('/', async (req, res) => {
-  res.render('homepage')
-});
+
+  try {
+      const dbBlogData = await BlogPosts.findAll({
+          include: [
+              {
+                  model: Users,
+              },
+              {
+                  model: Comments,
+              },
+          ],
+      });
+
+      const allBlogs = dbBlogData.map((blogs) =>
+          blogs.get({ plain: true })
+      );
+
+      console.log(allBlogs)
+      res.render('homepage', {
+          allBlogs,
+          users_id: req.session.users_id,
+          logged_in: req.session.logged_in
+      })
+  } catch (err) {
+      res.status(400).json(err);
+  }
+})
 
 //dashboard page
 router.get('/dashboard', async (req, res) => {
