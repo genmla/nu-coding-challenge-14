@@ -30,17 +30,17 @@ router.post('/login', async (req, res) => {
                 name: req.body.name
             }
         });
-        
+
         if (!dbUserData) {
-            res.status(400).json({ message: 'Username not found.'});
+            res.status(400).json({ message: 'Username not found.' });
             return;
         }
-        
+
         const validPassword = await dbUserData.checkPassword(req.body.password);
 
         if (!validPassword) {
             alert('Incorrect password, please try again');
-            res.status(400).json({ message: 'Incorect password.'});
+            res.status(400).json({ message: 'Incorect password.' });
             return;
         }
 
@@ -48,7 +48,7 @@ router.post('/login', async (req, res) => {
             req.session.user_id = dbUserData.id;
             req.session.logged_in = true;
 
-            res.json({ user: dbUserData, message: 'Logging in'});
+            res.json({ user: dbUserData, message: 'Logging in' });
         });
 
     } catch (err) {
