@@ -3,6 +3,19 @@ const path = require('path');
 const router = require('express').Router();
 const withAuth = require('../../utils/auth');
 
+router.post('/', async (req, res) => {
+    try {
+        const createBlog = await BlogPosts.create({
+            ...req.body, 
+            user_id: req.session.user_id
+        });
+        res.status(200).json(createBlog)
+        console.log(createBlog);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
 router.get('/:id', async (req, res) => {
 
     try {
@@ -31,7 +44,7 @@ router.get('/:id', async (req, res) => {
 
             res.render('noReviews', {
                 blog_id, 
-                users_id: req.session.users_id, 
+                user_id: req.session.user_id, 
                 logged_in: req.session.logged_in
             })
             return;
@@ -39,16 +52,16 @@ router.get('/:id', async (req, res) => {
         else {
             const blogTitle = oneBlogPost[0].blogpost.title;
             const blogContent = oneBlogPost[0].blogpost.content;
-            const blogUser = oneBlogPost[0].user.name;
-            const blogDate = oneBlogPost[0].blogpost.date;
+            // const blogUser = oneBlogPost[0].user.name;
+            // const blogDate = oneBlogPost[0].blogpost.date;
             
             res.render('oneBlogPost', {
                 oneBlogPost,
                 blogTitle,
                 blogContent, 
-                blogUser, 
-                blogDate,
-                users_id: req.session.users_id,
+                // blogUser, 
+                // blogDate,
+                user_id: req.session.user_id,
                 logged_in: req.session.logged_in
             })
         }

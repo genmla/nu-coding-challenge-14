@@ -8,26 +8,23 @@
     <div class="column is-8 is-offset-1">
         <section class="blog-list">
             {{#each allBlogs as |blog|}}
-            <a href="api/blogposts/{{blog.id}}">
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title" id="blog-title">{{blog.title}}</p>
 
-                    </header>
-            </a>
-            <div class="card-content">
-                <div class="content">
-                    {{blog.content}}
-                    <br>
-                    <br>
-                    Posted by {{blog.user.name}} on <time>{{blog.date}}</time>
+            <div class="card">
+                <a href="api/blogposts/{{blog.id}}">
+                <header class="card-header">
+                    <p class="card-header-title">{{blog.title}}</p>
+                </header></a>
+                <div class="card-content">
+                    <div class="content">
+                        {{blog.content}}
+                        <br>
+                        <br>
+                        Posted by {{blog.user.name}} on <time>{{blog.date}}</time>
+                    </div>
                 </div>
             </div>
+            <br />
+            {{/each}}
+        </section>
     </div>
-
-    <br />
-    {{/each}}
-    </section>
-</div>
-
 </div>
