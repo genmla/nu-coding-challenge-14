@@ -6,36 +6,36 @@ const withAuth = require('../utils/auth');
 router.get('/', async (req, res) => {
 
   try {
-    const dbBlogData = await BlogPosts.findAll({
-      include: [
-        {
-          model: Users,
-        },
-        {
-          model: Comments,
-        },
-      ],
-    });
+      const dbBlogData = await BlogPosts.findAll({
+          include: [
+              {
+                  model: Users,
+              },
+              {
+                  model: Comments,
+              },
+          ],
+      });
 
-    const allBlogs = dbBlogData.map((blogs) =>
-      blogs.get({ plain: true })
-    );
+      const allBlogs = dbBlogData.map((blogs) =>
+          blogs.get({ plain: true })
+      );
 
-    console.log(allBlogs)
-    res.render('homepage', {
-      allBlogs,
-      users_id: req.session.users_id,
-      logged_in: req.session.logged_in
-    })
+      console.log(allBlogs)
+      res.render('homepage', {
+          allBlogs,
+          users_id: req.session.users_id,
+          logged_in: req.session.logged_in
+      })
   } catch (err) {
-    res.status(400).json(err);
+      res.status(400).json(err);
   }
 })
 
 //dashboard page
 router.get('/dashboard', withAuth, async (req, res) => {
   res.render('dashboard', {
-    users_id: req.session.users_id,
+    users_id: req.session.users_id, 
     logged_in: req.session.logged_in
   })
 });

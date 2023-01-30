@@ -9,27 +9,26 @@
         <section class="blog-list">
             <div class="card">
                 <header class="card-header">
-                    <p class="card-header-title">{{blogTitle}}</p>
+                    <p class="card-header-title" id="blog-title">{{blogTitle}}</p>
                 </header>
                 <div class="card-content">
                     <div class="content">
                         {{blogContent}}
                         <br>
-                        <br>
-                        Posted by {{blogUser}} on <time>{{blogDate}}</time>
                     </div>
                 </div>
+                <header class="card-footer">
+                    <a href="/api/comments/" class="card-footer-item">Add Comment</a>
+                </header>
             </div>
             {{#each oneBlogPost as |comment|}}
             <div class="card">
                 <header class="card-header">
-                    <p class="card-header-title">{{comment.comment}}</p>
+                    <p class="card-header-title" id="comment-header">{{comment.user.name}} on {{comment.date}}</p>
                 </header>
                 <div class="card-content">
                     <div class="content">
-                        <br>
-                        <br>
-                        Posted by {{comment.user.name}} on <time>{{comment.date}}</time>
+                        {{comment.comment}}
                     </div>
                 </div>
             </div>
