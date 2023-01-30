@@ -3,10 +3,12 @@ const path = require('path');
 const router = require('express').Router();
 const withAuth = require('../../utils/auth');
 
+//create a new blog
 router.post('/', async (req, res) => {
     try {
         const createBlog = await BlogPosts.create({
             ...req.body, 
+            //pulls user_id from current session
             user_id: req.session.user_id
         });
         res.status(200).json(createBlog)
@@ -16,6 +18,7 @@ router.post('/', async (req, res) => {
     }
 });
 
+//display all comments for select blog by blog id
 router.get('/:id', async (req, res) => {
 
     try {
@@ -52,15 +55,11 @@ router.get('/:id', async (req, res) => {
         else {
             const blogTitle = oneBlogPost[0].blogpost.title;
             const blogContent = oneBlogPost[0].blogpost.content;
-            // const blogUser = oneBlogPost[0].user.name;
-            // const blogDate = oneBlogPost[0].blogpost.date;
             
             res.render('oneBlogPost', {
                 oneBlogPost,
                 blogTitle,
                 blogContent, 
-                // blogUser, 
-                // blogDate,
                 user_id: req.session.user_id,
                 logged_in: req.session.logged_in
             })
