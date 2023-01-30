@@ -1,19 +1,20 @@
 <section class="hero-body">
-  <p class="title">
+  <p class="title has-text-info-dark">
     Your Dashboard
   </p>
 </section>
 
-<div class="columns">
+<div class="columns has-background-info-dark">
   <div class="column is-8 is-offset-1">
 
     {{#each userBlogsDisplay as |blog|}}
 
     <div class="card">
       <a href="api/blogposts/{{blog.id}}">
-      <header class="card-header">
-        <p class="card-header-title">{{blog.title}}</p>
-      </header></a>
+        <header class="card-header">
+          <p class="card-header-title has-background-info has-text-light">{{blog.title}}</p>
+        </header>
+      </a>
 
       <div class="card-content">
         <div class="content">
@@ -23,6 +24,12 @@
           Posted by {{blog.user.name}} on <time>{{blog.date}}</time>
         </div>
       </div>
+
+      <footer class="card-footer">
+        <a href="/api/blogposts/delete/:blog_id" class="card-footer-item has-background-info-light">Delete</a>
+        <a href="/api/blogposts/update/:blog_id"
+          class="card-footer-item card-footer-item has-background-info-light">Update</a>
+      </footer>
     </div>
     <br />
     {{/each}}

@@ -1,15 +1,15 @@
 <section class="hero-body">
-    <p class="title">
+    <p class="title has-text-info-dark">
         The Tech Blog
     </p>
 </section>
 
-<div class="columns">
+<div class="columns has-background-info-dark">
     <div class="column is-8 is-offset-1">
         <section class="blog-list">
             <div class="card">
                 <header class="card-header">
-                    <p class="card-header-title" id="blog-title">{{blogTitle}}</p>
+                    <p class="card-header-title has-text-light has-background-info" id="blog-title">{{blogTitle}}</p>
                 </header>
                 <div class="card-content">
                     <div class="content">
@@ -17,16 +17,17 @@
                         <br>
                     </div>
                 </div>
-                <header class="card-footer">
-                    <a href="/api/comments/" class="card-footer-item">Add Comment</a>
-                </header>
+                <footer class="card-footer">
+                    <a href="" class="card-footer-item has-background-info-light">Add Comment</a>
+                </footer>
             </div>
-            <br/>
-            <p class="subtitle">Comments:</p>
+            <br />
+            <p class="subtitle has-text-info-light">Comments:</p>
             {{#each oneBlogPost as |comment|}}
             <div class="card">
                 <header class="card-header">
-                    <p class="card-header-title" id="comment-header">{{comment.user.name}} on {{comment.date}}</p>
+                    <p class="card-header-title has-text-dark has-background-info-light" id="comment-header">
+                        {{comment.user.name}} on {{comment.date}}</p>
                 </header>
                 <div class="card-content">
                     <div class="content">
