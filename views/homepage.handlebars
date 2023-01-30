@@ -1,19 +1,20 @@
 <section class="hero-body">
-    <p class="title">
+    <p class="title has-text-info-dark">
         The Tech Blog
     </p>
 </section>
 
-<div class="columns">
-    <div class="column is-8 is-offset-1">
+<div class="columns has-background-info-dark">
+    <div class="column is-8 is-offset-1 ">
         <section class="blog-list">
             {{#each allBlogs as |blog|}}
 
             <div class="card">
                 <a href="api/blogposts/{{blog.id}}">
-                <header class="card-header">
-                    <p class="card-header-title">{{blog.title}}</p>
-                </header></a>
+                    <header class="card-header">
+                        <p class="card-header-title has-text-light has-background-info">{{blog.title}}</p>
+                    </header>
+                </a>
                 <div class="card-content">
                     <div class="content">
                         {{blog.content}}
