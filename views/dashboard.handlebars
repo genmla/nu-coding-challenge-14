@@ -2,6 +2,9 @@
   <p class="title has-text-info-dark">
     Your Dashboard
   </p>
+  <p class="subtitle title has-text-info-dark">
+    View your blog posts and create new posts on your Dashboard!
+  </p>
 </section>
 
 <div class="columns has-background-info-dark">
@@ -26,9 +29,8 @@
       </div>
 
       <footer class="card-footer">
-        <a href="/api/blogposts/delete/:blog_id" class="card-footer-item has-background-info-light">Delete</a>
-        <a href="/api/blogposts/update/:blog_id"
-          class="card-footer-item card-footer-item has-background-info-light">Update</a>
+        <a href="/api/blogposts/:id" class="card-footer-item has-background-info-light">Delete</a>
+        <a href="/api/blogposts/:id" class="card-footer-item card-footer-item has-background-info-light">Update</a>
       </footer>
     </div>
     <br />
