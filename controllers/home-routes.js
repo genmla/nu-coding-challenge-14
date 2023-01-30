@@ -7,6 +7,9 @@ router.get('/', async (req, res) => {
 
   try {
     const dbBlogData = await BlogPosts.findAll({
+      order: [
+        ['date', 'DESC']
+      ],
       include: [
         {
           model: Users,
@@ -39,6 +42,9 @@ router.get('/dashboard', withAuth, async (req, res) => {
       where: {
         user_id: req.session.user_id
       },
+      order: [
+        ['date', 'DESC']
+      ],
       include: [
         {
           model: Users
