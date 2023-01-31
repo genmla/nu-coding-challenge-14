@@ -1,4 +1,4 @@
-const deleteBlog = async(event) => {
+const deleteBlog = async (event) => {
     if (event.target.hasAttribute('data-id')) {
         const id = event.target.getAttribute('data-id');
 
@@ -15,5 +15,5 @@ const deleteBlog = async(event) => {
 };
 
 document
-.querySelector('.blog-posts')
-.addEventListener('click', deleteBlog)
+    .querySelector('.blog-posts')
+    .addEventListener('click', deleteBlog)

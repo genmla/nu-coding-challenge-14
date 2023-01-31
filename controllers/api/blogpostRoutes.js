@@ -20,26 +20,18 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 //update existing blog
-router.put('/update/:id', withAuth, async (req, res) => {
-    try {
-        const updateBlog = await BlogPosts.update(
-            {
-                title: req.body.title, 
-                content: req.body.content,
-            },
-            {
-                where: {
-                    user_id: req.session.user_id,
-                    id: req.params.id,
-                }
-            }
-        );
-        res.status(200).json(createBlog)
-        console.log(createBlog);
-    } catch (err) {
-        res.status(400).json(err);
-    }
-});
+// router.put('/:id', async (req, res) => {
+//     try {
+//         const updateBlog = await BlogPosts.update(req.body, {
+//             where: {
+//                 id: req.params.id
+//             }
+//         });
+//         res.status(200).json(updateBlog);
+//     } catch (err) {
+//         res.status(400).json(err);
+//     }
+// });
 
 //delete existing blog
 router.delete('/delete/:id', async (req, res) => {
@@ -72,18 +64,18 @@ router.get('/:id', async (req, res) => {
                     model: Users
                 },
                 {
-                    model: Comments, 
-                        include: [
-                            //include users model for comments to get commenter user name
-                            {
-                                model: Users,
-                            }
-                        ]
+                    model: Comments,
+                    include: [
+                        //include users model for comments to get commenter user name
+                        {
+                            model: Users,
+                        }
+                    ]
                 },
             ],
         });
 
-        const oneBlogPost = dbBlogData.get({ plain: true})
+        const oneBlogPost = dbBlogData.get({ plain: true })
 
         //capture variables to pass to hb temp (could write in temp as well)
         const blogTitle = oneBlogPost.title;
@@ -96,7 +88,7 @@ router.get('/:id', async (req, res) => {
         const blogComments = oneBlogPost.comments
 
         //map over comments array to display #each in hb template for blog post
-        const blogCommentsDisplay = blogComments.map((comments)=>
+        const blogCommentsDisplay = blogComments.map((comments) =>
             comments);
 
         res.render('oneBlogPost', {
@@ -107,7 +99,7 @@ router.get('/:id', async (req, res) => {
             blogUserId,
             blogCommentsDisplay,
             user_id: req.session.user_id,
-            logged_in: req.session.logged_in 
+            logged_in: req.session.logged_in
         })
 
     } catch (err) {
