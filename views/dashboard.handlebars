@@ -3,38 +3,44 @@
     Your Dashboard
   </p>
   <p class="subtitle title has-text-info-dark">
-    View your blog posts and create new posts on your Dashboard!
+    Edit and create your blog posts on your Dashboard!
   </p>
 </section>
 
 <div class="columns has-background-info-dark">
   <div class="column is-8 is-offset-1">
+    <a href="/create"><button class="button is-medium is-fullwidth is-info">Create a New Post</button></a>
+    <br>
+    <section class="blog-posts">
+      {{#each userBlogsDisplay as |blog|}}
 
-    {{#each userBlogsDisplay as |blog|}}
+      <div class="card">
+        <a href="/api/blogposts/{{blog.id}}">
+          <header class="card-header">
+            <p class="card-header-title has-background-info has-text-light">{{blog.title}}</p>
+          </header>
+        </a>
 
-    <div class="card">
-      <a href="api/blogposts/{{blog.id}}">
-        <header class="card-header">
-          <p class="card-header-title has-background-info has-text-light">{{blog.title}}</p>
-        </header>
-      </a>
-
-      <div class="card-content">
-        <div class="content">
-          {{blog.content}}
-          <br>
-          <br>
-          Posted by {{blog.user.name}} on <time>{{blog.date}}</time>
+        <div class="card-content">
+          <div class="content">
+            {{blog.content}}
+            <br>
+            <br>
+            Posted by {{blog.user.name}} on <time>{{blog.date}}</time>
+          </div>
+          <footer class="card-footer">
+            <a class="card-footer-item has-background-info-light" id="delete" data-id="{{blog.id}}">Delete</a>
+            <a href="/update/{{blog.id}}" class="card-footer-item card-footer-item has-background-info-light">Update</a>
+            <a href="/api/blogposts/{{blog.id}}"
+              class="card-footer-item card-footer-item has-background-info-light">View Comments</a>
+          </footer>
         </div>
       </div>
-
-      <footer class="card-footer">
-        <a href="/api/blogposts/:id" class="card-footer-item has-background-info-light">Delete</a>
-        <a href="/api/blogposts/:id" class="card-footer-item card-footer-item has-background-info-light">Update</a>
-      </footer>
-    </div>
-    <br />
-    {{/each}}
-    <a href="/create"><button class="button is-medium is-fullwidth is-info">Create a New Post</button></a>
+      <br />
+      {{/each}}
+    </section>
   </div>
 </div>
+</div>
+
+<script src="/js/dashboard.js"></script>
