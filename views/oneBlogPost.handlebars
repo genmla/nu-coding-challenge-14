@@ -15,6 +15,11 @@
                     <div class="content">
                         {{blogContent}}
                         <br>
+                        <br>
+                    </div>
+                    <div class="content">
+                        Post by {{blogUser}} on {{blogDate}}
+                        <br>
                     </div>
                 </div>
                 <footer class="card-footer">
@@ -23,7 +28,7 @@
             </div>
             <br />
             <p class="subtitle has-text-info-light">Comments:</p>
-            {{#each oneBlogPost as |comment|}}
+            {{#each blogCommentsDisplay as |comment|}}
             <div class="card">
                 <header class="card-header">
                     <p class="card-header-title has-text-dark has-background-info-light" id="comment-header">
@@ -35,6 +40,7 @@
                     </div>
                 </div>
             </div>
+            <br>
             {{/each}}
         </section>
     </div>

@@ -49,6 +49,9 @@ router.get('/dashboard', withAuth, async (req, res) => {
         {
           model: Users
         },
+        {
+          model: Comments
+        },
       ],
     });
 
@@ -56,7 +59,8 @@ router.get('/dashboard', withAuth, async (req, res) => {
       blogs.get({ plain: true })
     );
 
-    console.log(userBlogsDisplay)
+    console.log(userBlogs);
+    console.log(userBlogsDisplay);
 
     res.render('dashboard', {
       userBlogsDisplay,
