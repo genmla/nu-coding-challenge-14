@@ -6,27 +6,25 @@
 
 <div class="columns has-background-info-dark">
     <div class="column is-three-fifths is-offset-one-fifth">
-        <form class="box blog-form">
-            <h1 class="title">New Blog Post</h1>
+        <form class="box update-form">
+            <h1 class="title">Update Blog Post</h1>
             <div class="field">
-                <label class="label">Title</label>
                 <div class="control">
-                    <input class="input" id="title" type="text" placeholder="Blog Title">
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">Content</label>
-                <div class="control">
-                    <textarea class="textarea" id="content" type="text" placeholder="Blog Content"></textarea>
+                    <textarea class="textarea has-background-info has-text-light" id="title" type="text" rows="1">{{updateBlogDisplay.title}}</textarea>
                 </div>
             </div>
             <div class="field">
                 <div class="control">
-                    <button class="button is-info" id="post-btn" type="submit">Post</button>
+                    <textarea class="textarea" id="content" type="text">{{updateBlogDisplay.content}}</textarea>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <button class="button is-info" id="update-btn" data-id="{{updateBlogDisplay.id}}" type="submit">Update</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
 
-<script src="./js/createBlog.js"></script>
+<script src="/js/updateBlog.js"></script>
