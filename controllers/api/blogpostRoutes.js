@@ -19,20 +19,6 @@ router.post('/', withAuth, async (req, res) => {
     }
 });
 
-//update existing blog
-// router.put('/:id', async (req, res) => {
-//     try {
-//         const updateBlog = await BlogPosts.update(req.body, {
-//             where: {
-//                 id: req.params.id
-//             }
-//         });
-//         res.status(200).json(updateBlog);
-//     } catch (err) {
-//         res.status(400).json(err);
-//     }
-// });
-
 //delete existing blog
 router.delete('/delete/:id', async (req, res) => {
     try {
@@ -79,6 +65,7 @@ router.get('/:id', async (req, res) => {
 
         //capture variables to pass to hb temp (could write in temp as well)
         const blogTitle = oneBlogPost.title;
+        const blogId = oneBlogPost.id;
         const blogContent = oneBlogPost.content;
         const blogDate = oneBlogPost.date;
         const blogUser = oneBlogPost.user.name;
@@ -93,6 +80,7 @@ router.get('/:id', async (req, res) => {
 
         res.render('oneBlogPost', {
             blogTitle,
+            blogId,
             blogContent,
             blogDate,
             blogUser,

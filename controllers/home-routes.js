@@ -100,6 +100,7 @@ router.get('/create', withAuth, async (req, res) => {
 });
 
 //update existing blog
+//adjusted fetch route on home page because request coming from rendered update view (above)
 router.put('/update/api/blogposts/:id', async (req, res) => {
   try {
     const updateBlog = await BlogPosts.update(req.body, {
@@ -112,6 +113,21 @@ router.put('/update/api/blogposts/:id', async (req, res) => {
     res.status(400).json(err);
 }
 });
+
+//post a comment
+//adjust post route on home page because request coming from rendered onblog view ... I'll learn more about this later...
+router.post('/api/blogposts/api/comments/', withAuth, async (req, res) => {
+  try {
+      const postComment = await Comments.create({
+          ...req.body,
+          user_id: req.session.user_id
+      });
+      res.status(200).json(postComment)
+      console.log(postComment)
+  } catch (err) {
+      res.status(400).json(err);
+  }
+})
 
 //login page
 router.get('/login', async (req, res) => {
