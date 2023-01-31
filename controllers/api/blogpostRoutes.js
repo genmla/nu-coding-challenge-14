@@ -20,7 +20,7 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 //update existing blog
-router.put('/:id', withAuth, async (req, res) => {
+router.put('/update/:id', withAuth, async (req, res) => {
     try {
         const updateBlog = await BlogPosts.update(
             {
@@ -42,12 +42,11 @@ router.put('/:id', withAuth, async (req, res) => {
 });
 
 //delete existing blog
-router.delete('/:id', withAuth, async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
     try {
         const deleteBlog = await BlogPosts.destroy({
             where: {
                 id: req.params.id,
-                user_id: res.session.user_id,
             }
         });
 
@@ -58,7 +57,6 @@ router.delete('/:id', withAuth, async (req, res) => {
         }
 
         res.status(200).json(deleteBlog)
-        console.log(deleteBlog);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -76,6 +74,7 @@ router.get('/:id', async (req, res) => {
                 {
                     model: Comments, 
                         include: [
+                            //include users model for comments to get commenter user name
                             {
                                 model: Users,
                             }
@@ -84,73 +83,32 @@ router.get('/:id', async (req, res) => {
             ],
         });
 
-        // const oneBlogPost = dbBlogData.map((reviews) =>
-        //     reviews.get({ plain: true })
-        // );
-
         const oneBlogPost = dbBlogData.get({ plain: true})
-        console.log('----------oneBlogPost---------')
-        console.log(oneBlogPost);
+
+        //capture variables to pass to hb temp (could write in temp as well)
         const blogTitle = oneBlogPost.title;
         const blogContent = oneBlogPost.content;
         const blogDate = oneBlogPost.date;
         const blogUser = oneBlogPost.user.name;
-        console.log(blogTitle);
-        // const blogComments = oneBlogPost.comments.map((comments) =>
-        // comments.get({ plain: true}));
+        const blogUserId = oneBlogPost.user.id;
 
-        // console.log(oneBlogPost);
+        //capture array to map comments associated with blog
         const blogComments = oneBlogPost.comments
-        // console.log(blogComments)
 
-        
-        console.log('---------comments-----------------')
-        console.log(blogComments)
-
+        //map over comments array to display #each in hb template for blog post
         const blogCommentsDisplay = blogComments.map((comments)=>
             comments);
-        console.log('------------map-------')
-        console.log(blogCommentsDisplay)
 
         res.render('oneBlogPost', {
             blogTitle,
             blogContent,
             blogDate,
             blogUser,
-            blogCommentsDisplay, 
+            blogUserId,
+            blogCommentsDisplay,
+            user_id: req.session.user_id,
+            logged_in: req.session.logged_in 
         })
-
-        // res.status(200).json(oneBlogPost)
-
-        // const comment = oneBlogPost.comments[0].comment
-        // console.log(comment)
-        // const commentUser = oneBlogPost.comments[0].user.name
-        // console.log(commentUser)
-        // res.status(200).json(blogCommentsDisplay)
-
-
-        // if (oneBlogPost.length == 0) {
-        //     const blog_id = req.params.id;
-
-        //     res.render('noReviews', {
-        //         blog_id,
-        //         user_id: req.session.user_id,
-        //         logged_in: req.session.logged_in
-        //     })
-        //     return;
-        // }
-        // else {
-        //     const blogTitle = oneBlogPost[0].blogpost.title;
-        //     const blogContent = oneBlogPost[0].blogpost.content;
-
-        //     res.render('oneBlogPost', {
-        //         oneBlogPost,
-        //         blogTitle,
-        //         blogContent,
-        //         user_id: req.session.user_id,
-        //         logged_in: req.session.logged_in
-        //     })
-        // }
 
     } catch (err) {
         res.status(400).json(err);
