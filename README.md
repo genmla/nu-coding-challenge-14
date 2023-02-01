@@ -12,7 +12,9 @@ A simple blog allowing users to read posts, and create accounts to contribute to
 
 ## Installation
 
-The user can access the app through the Herko deployment here: 
+The user can access the app through the [Herko application here](https://shielded-scrubland-44984.herokuapp.com/) or at the link below: 
+
+https://shielded-scrubland-44984.herokuapp.com/
 
 Users who wish to use the app locally can clone the repository, run npm install within the directory, create a .env file for the connection file to access the tech_blog_db database.
 

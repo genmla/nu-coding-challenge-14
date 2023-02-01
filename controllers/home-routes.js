@@ -140,7 +140,7 @@ router.get('/users/', async (req, res) => {
 });
 
 //logout page
-router.get('/logout', async (req, res) => {
+router.get('/api/users/logout', async (req, res) => {
   //might want to ask user to confirm they would like to log out before rendering logout page
   res.render('logout')
 });
